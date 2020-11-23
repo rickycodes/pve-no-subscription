@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 FILE=/usr/share/perl5/PVE/API2/Subscription.pm
 if test -f "$FILE"; then
     sed -i "s/NotFound/Active/g" "$FILE"

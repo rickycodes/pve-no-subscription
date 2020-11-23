@@ -8,7 +8,7 @@ and supporting the development of Proxmox VE.
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycodes/pve-no-subscription/main/no-subscription-warning.sh | sh
 ```
-Do not just curl blindly! :see_no_evil:
+Do not curl blindly :see_no_evil:
 
 [Audit the script before you run it](no-subscription-warning.sh)
 
