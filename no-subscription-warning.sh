@@ -9,7 +9,7 @@ CAT=$(cat "$FILE" | grep "$FIND")
 if [ $? -eq "0" ]; then
   echo "subscription status: $FIND"
   if test -f "$FILE"; then
-      echo "performing replacement..."
+      echo "performing replacement in $FILE..."
       sed -i "s/$FIND/$REPLACE/g" "$FILE"
       ex=$?
       if [ "$ex" -eq "0" ]; then
