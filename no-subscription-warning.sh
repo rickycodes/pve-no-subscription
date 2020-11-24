@@ -10,7 +10,7 @@ OUTPUT_RESTARTING_SERVICES="restarting services..."
 OUTPUT_ALL_DONE="all done!"
 OUTPUT_SOMETHING_WENT_WRONG="something went wrong :("
 OUTPUT_CANNOT_FIND_ITEM="cannot find item. have you already run the replacement?"
-OUTPUT_FILE_DOES_NOT_EXIST="file does not exist! are you sure this is pve?"
+OUTPUT_FILE_DOES_NOT_EXIST="$FILE does not exist! are you sure this is pve?"
 
 if test -f "$FILE"; then
   if grep -i "$FIND" "$FILE"

@@ -1,6 +1,6 @@
-# Proxmox VE No-Subscription Removal
+[![Build Status](https://travis-ci.org/rickycodes/pve-no-subscription.svg?branch=main)](https://travis-ci.org/rickycodes/pve-no-subscription) ![Shellcheck Status](https://img.shields.io/badge/shellcheck-passing-brightgreen)
 
-[![Build Status](https://travis-ci.org/rickycodes/pve-no-subscription.svg?branch=main)](https://travis-ci.org/rickycodes/www)
+# Proxmox VE No-Subscription Removal
 
 This script removes the 'No valid subscription' warning in Proxmox VE 6 and should only be used in test or demo environments. Please consider [buying a subscription](https://www.proxmox.com/en/proxmox-ve/pricing)
 and supporting the development of Proxmox VE.
@@ -14,7 +14,14 @@ Do not curl blindly :see_no_evil:
 
 [Audit the script before you run it](no-subscription-warning.sh)
 
-You should see the following result:
+You can also clone the repo with git and run locally if you prefer:
+```
+git clone git@github.com:rickycodes/pve-no-subscription.git
+cd pve-no-subscription
+bash no-subscription-warning.sh
+```
+
+After a successful run, you should see the following result:
 ```
 subscription status: NotFound
 performing replacement in /usr/share/perl5/PVE/API2/Subscription.pm...
@@ -25,6 +32,11 @@ all done!
 Running the script a second time will produce the following result:
 ``` 
 cannot find item. have you already run the replacement?
+```
+
+Running the script on a non pve install will produce:
+```
+/usr/share/perl5/PVE/API2/Subscription.pm does not exist! are you sure this is pve?
 ```
 
 ## Notes
