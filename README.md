@@ -62,7 +62,7 @@ I couldn't get the install steps in [https://github.com/lnxbil/pve-no-subscripti
 
 This script is a result of that discovery.
 
-This is very likely to break i the future. But as of this writing it works for proxmox v 6.2.
+This is very likely to break in the future. But as of this writing it works for proxmox v 6.2., 6.3.
 
 ## License
 
