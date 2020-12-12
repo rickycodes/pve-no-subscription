@@ -11,14 +11,14 @@ and supporting the development of Proxmox VE.
 
 ##### 1. Curl
 
-`curl` into a bash or bash like shell (colloquially known as yolo'ing):
+`curl` into bash like shell:
 
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycodes/pve-no-subscription/main/no-subscription-warning.sh | sh
 ```
 Do not curl blindly :see_no_evil: [Audit the script before you run it](no-subscription-warning.sh). It's not doing anything terribly surprising, I assure you!
 
-##### 2. Git clone
+##### 2. Clone
 
 You can also clone the repo with git and run locally if you prefer, but you'll need `git` (a typical proxmox host doesn't have it):
 ```
@@ -27,7 +27,7 @@ cd pve-no-subscription
 bash no-subscription-warning.sh
 ```
 
-##### 3. Direct download
+##### 3. Download
 
 Or, you can download the source directly from one of [the releases](https://github.com/rickycodes/pve-no-subscription/releases/tag/v1.0):
 ```
@@ -73,7 +73,7 @@ I couldn't get the install steps in [https://github.com/lnxbil/pve-no-subscripti
 
 This script is a result of that discovery.
 
-This is very likely to break in the future. But as of this writing it works for proxmox v 6.2., 6.3.
+This is very likely to break in the future. But as of this writing it works for proxmox v `6.2.`, `6.3.`, `6.3-2`, `6.3-3`
 
 ## License
 
