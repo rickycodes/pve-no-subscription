@@ -36,7 +36,7 @@ tar -xf source.tar.gz
 bash ./pve-no-subscription/no-subscription-warning.sh
 ```
 
-## Output
+## Diagnostic
 
 After a successful run, you should see the following result:
 ```
@@ -54,6 +54,17 @@ cannot find item. have you already run the replacement?
 Running the script on a non pve install will produce:
 ```
 /usr/share/perl5/PVE/API2/Subscription.pm does not exist! are you sure this is pve?
+```
+
+## TL;DR
+
+If you don't care about the above diagnostic feedback and you'd rather yolo:
+```sh
+#!/bin/sh
+set -ex
+sed -i "s/NotFound/Active/g" "/usr/share/perl5/PVE/API2/Subscription.pm"
+systemctl restart pvedaemon
+systemctl restart pveproxy
 ```
 
 ## Notes

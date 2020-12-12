@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -ex
 FIND="NotFound"
 REPLACE="Active"
 FILE=/usr/share/perl5/PVE/API2/Subscription.pm
@@ -20,7 +20,8 @@ if test -f "$FILE"; then
     if sed -i "s/$FIND/$REPLACE/g" "$FILE"
     then
       echo "$OUTPUT_RESTARTING_SERVICES"
-      systemctl restart pvedaemon && systemctl restart pveproxy
+      systemctl restart pvedaemon
+      systemctl restart pveproxy
       echo "$OUTPUT_ALL_DONE"
     else
       echo "$OUTPUT_SOMETHING_WENT_WRONG"
