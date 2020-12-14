@@ -38,7 +38,9 @@ bash ./pve-no-subscription/no-subscription-warning.sh
 
 ## Diagnostic
 
-After a successful run, you should see the following result:
+The script provides stdout and verifies a few things on behalf of the user.
+
+#### After a successful run, you should see the following result:
 ```
 subscription status: NotFound
 performing replacement in /usr/share/perl5/PVE/API2/Subscription.pm...
@@ -46,25 +48,31 @@ restarting services...
 all done!
 ```
 
-Running the script a second time will produce the following result:
+#### Running the script a second time will produce the following result:
 ``` 
 cannot find item. have you already run the replacement?
 ```
 
-Running the script on a non pve install will produce:
+#### Running the script on a non pve install will produce:
 ```
 /usr/share/perl5/PVE/API2/Subscription.pm does not exist! are you sure this is pve?
 ```
 
 ## TL;DR
 
-If you don't care about the above diagnostic feedback and you'd rather yolo:
+If you don't care about the above diagnostic feedback and you'd rather yolo, this is the gist of it:
 ```sh
 #!/bin/sh
 set -ex
 sed -i "s/NotFound/Active/g" "/usr/share/perl5/PVE/API2/Subscription.pm"
 systemctl restart pvedaemon
 systemctl restart pveproxy
+```
+
+You can also utilize the steamroll `--steamroll` option (`$1`), eg:
+
+```
+bash no-subscription-warning.sh --steamroll
 ```
 
 ## Notes
