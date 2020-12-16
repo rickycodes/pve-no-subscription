@@ -75,6 +75,69 @@ You can also utilize the steamroll `--steamroll` option (`$1`), eg:
 bash no-subscription-warning.sh --steamroll
 ```
 
+## Adding apt hook
+
+After updating you may find you need to re-run the script to apply the patch. You can automate this by adding a `Post-Invoke` apt hook.
+
+First, let's create the script to run (you can put these files anywhere, but I am following pve conventions as best I can).
+
+```
+touch /usr/share/proxmox-ve/pve-apt-post-hook
+```
+
+The above file should look something like this:
+
+```sh
+#!/usr/bin/env bash
+set -ex
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycodes/pve-no-subscription/main/no-subscription-warning.sh | sh
+```
+
+We'll also need to make the file executable:
+
+```
+chmod 755 /usr/share/proxmox-ve/pve-apt-post-hook
+```
+
+Once that's done, we can add the hook. For that we're going to edit an existing file: `/etc/apt/apt.conf.d/10pveapthook`
+
+Add the following line to the above file:
+
+```
+DPkg::Post-Invoke {"/usr/share/proxmox-ve/pve-apt-post-hook"; };
+```
+
+And that's it! The next time you perform an `apt upgrade` you should see something like the following (if the patch needs to be applied):
+
+```
+...
+Setting up dnsutils (1:9.11.5.P4+dfsg-5.1+deb10u2) ...
+Processing triggers for mime-support (3.62) ...
+Processing triggers for libc-bin (2.28-10) ...
+Processing triggers for rsyslog (8.1901.0-1) ...
+Processing triggers for systemd (241-7~deb10u5) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for initramfs-tools (0.133+deb10u1) ...
+update-initramfs: Generating /boot/initrd.img-5.4.34-1-pve
+Running hook script 'zz-pve-efiboot'..
+Re-executing '/etc/kernel/postinst.d/zz-pve-efiboot' in new private mount namespace..
+No /etc/kernel/pve-efiboot-uuids found, skipping ESP sync.
+Processing triggers for ca-certificates (20200601~deb10u1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
++ sh
++ curl --proto =https --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycodes/pve-no-subscription/main/no-subscription-warning.sh
+		status => "NotFound",
+subscription status: NotFound
+attempting replacement in /usr/share/perl5/PVE/API2/Subscription.pm...
+restarting services...
+all done!
+```
+
+You can see the script ran successfully around the `+ sh` part.
+
 ## Notes
 
 I couldn't get the install steps in [https://github.com/lnxbil/pve-no-subscription](https://github.com/lnxbil/pve-no-subscription) to work properly and [discovered this](https://github.com/lnxbil/pve-no-subscription/issues/5#issue-671298084).
