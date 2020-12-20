@@ -18,7 +18,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycode
 ```
 Do not curl blindly :see_no_evil: [Audit the script before you run it](no-subscription-warning.sh). It's not doing anything terribly surprising, I assure you!
 
-##### 2. Clone
+##### 2. With Git
 
 You can also clone the repo with git and run locally if you prefer, but you'll need `git` (a typical proxmox host doesn't have it):
 ```
@@ -69,7 +69,7 @@ systemctl restart pvedaemon
 systemctl restart pveproxy
 ```
 
-You can also utilize the steamroll `--steamroll` option (`$1`), eg:
+You can also utilize the steamroll (`--steamroll`) argument (`$1`), which is effectively the same as above:
 
 ```
 bash no-subscription-warning.sh --steamroll
@@ -96,7 +96,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/rickycode
 We'll also need to make the file executable:
 
 ```
-chmod 755 /usr/share/proxmox-ve/pve-apt-post-hook
+chmod +x /usr/share/proxmox-ve/pve-apt-post-hook
 ```
 
 Once that's done, we can add the hook. For that we're going to edit an existing file: `/etc/apt/apt.conf.d/10pveapthook`
@@ -104,7 +104,7 @@ Once that's done, we can add the hook. For that we're going to edit an existing 
 Add the following line to the above file:
 
 ```
-DPkg::Post-Invoke {"/usr/share/proxmox-ve/pve-apt-post-hook"; };
+DPkg::Post-Invoke { "/usr/share/proxmox-ve/pve-apt-post-hook"; };
 ```
 
 And that's it! The next time you perform an `apt upgrade` you should see something like the following (if the patch needs to be applied):
@@ -140,9 +140,9 @@ You can see the script ran successfully around the `+ sh` part.
 
 ## Notes
 
-I couldn't get the install steps in [https://github.com/lnxbil/pve-no-subscription](https://github.com/lnxbil/pve-no-subscription) to work properly and [discovered this](https://github.com/lnxbil/pve-no-subscription/issues/5#issue-671298084).
+I couldn't get the install steps in [pve-no-subscription](https://github.com/lnxbil/pve-no-subscription) to work properly and [discovered this](https://github.com/lnxbil/pve-no-subscription/issues/5#issue-671298084). This script is a result of that discovery.
 
-This script is a result of that discovery.
+[pve-nag-buster](https://github.com/foundObjects/pve-nag-buster) does the replacement in the web UI source, but that approach also seems to have stopped working? There's an [issue here](https://github.com/foundObjects/pve-nag-buster/issues/3) with details on how to get around that).
 
 This is very likely to break in the future. But as of this writing it works for proxmox v `6.2.`, `6.3.`, `6.3-2`, `6.3-3`
 
