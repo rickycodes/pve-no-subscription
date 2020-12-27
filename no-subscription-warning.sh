@@ -24,6 +24,7 @@
 
 set -e
 
+FIND="NotFound"
 FILE=/usr/share/perl5/PVE/API2/Subscription.pm
 ARG="$1"
 
