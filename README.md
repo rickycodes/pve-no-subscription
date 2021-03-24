@@ -149,3 +149,5 @@ This is very likely to break in the future. But as of this writing it works for 
 ## License
 
 MIT License. See the [LICENSE](LICENSE) file for details.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frickycodes%2Fpve-no-subscription.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frickycodes%2Fpve-no-subscription?ref=badge_large)
