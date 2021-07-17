@@ -145,7 +145,7 @@ I couldn't get the install steps in [pve-no-subscription](https://github.com/lnx
 
 [pve-nag-buster](https://github.com/foundObjects/pve-nag-buster) does the replacement in the web UI source, but that approach also seems to have stopped working? There's an [issue here](https://github.com/foundObjects/pve-nag-buster/issues/3) with details on how to get around that).
 
-This is very likely to break in the future. But as of this writing it works for proxmox versions `6.2.x` through to `6.3-6`
+This is very likely to break in the future. But as of this writing it works for proxmox versions `6.2.x` through to `6.4-13`
 
 ## License
 
