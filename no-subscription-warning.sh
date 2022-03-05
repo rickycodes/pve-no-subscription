@@ -41,18 +41,13 @@ echo "attempting pve-no-subscription patch"
 if ! [ -n "$ARG" ]; then
   if ! test -f "$FILE"; then
     echo "$FILE does not exist! are you sure this is pve?"
-    exit 1
+    exit 0
   fi
 
   if ! grep -i "$FIND" "$FILE"; then
     echo "pve appears to be patched."
-    exit 1
+    exit 0
   fi
-
-  echo "subscription status: $FIND"
-  echo "attempting replacement in $FILE..."
-  apply_razor1911_crack
-  exit 1
 fi
 
 if ! [ "$ARG" == "--steamroll" ]; then
@@ -60,4 +55,6 @@ if ! [ "$ARG" == "--steamroll" ]; then
   exit 1
 fi
 
+echo "subscription status: $FIND"
+echo "attempting replacement in $FILE..."
 apply_razor1911_crack
