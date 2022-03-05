@@ -38,22 +38,23 @@ apply_razor1911_crack() {
 
 echo "attempting pve-no-subscription patch"
 
-if [ -n "$ARG" ]; then
-  if [ "$ARG" == "--steamroll" ]; then
-    apply_razor1911_crack
-  else
-    echo "unrecognized option"
-  fi
-else
-  if test -f "$FILE"; then
-    if grep -i "$FIND" "$FILE"; then
-      echo "subscription status: $FIND"
-      echo "attempting replacement in $FILE..."
-      apply_razor1911_crack
-    else
-      echo "pve appears to be patched."
-    fi
-  else
+if ! [ -n "$ARG" ]; then
+  if ! test -f "$FILE"; then
     echo "$FILE does not exist! are you sure this is pve?"
+    exit 0
+  fi
+
+  if ! grep -i "$FIND" "$FILE"; then
+    echo "pve appears to be patched."
+    exit 0
   fi
 fi
+
+if ! [ "$ARG" == "--steamroll" ]; then
+  echo "unrecognized option"
+  exit 1
+fi
+
+echo "subscription status: $FIND"
+echo "attempting replacement in $FILE..."
+apply_razor1911_crack
