@@ -50,11 +50,6 @@ if ! [ -n "$ARG" ]; then
   fi
 fi
 
-if ! [ "$ARG" == "--steamroll" ]; then
-  echo "unrecognized option"
-  exit 1
-fi
-
 echo "subscription status: $FIND"
 echo "attempting replacement in $FILE..."
 apply_razor1911_crack
