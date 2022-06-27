@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # MIT License
 
@@ -25,15 +25,16 @@
 set -e
 
 FIND="NotFound"
+ACTIVE="Active"
 FILE=/usr/share/perl5/PVE/API2/Subscription.pm
 ARG="$1"
 
 apply_razor1911_crack() {
-  sed -i "s/$FIND/Active/g" "$FILE"
-  echo "restart services..."
+  sed -i "s/$FIND/$ACTIVE/g" "$FILE"
+  echo "restarting services..."
   systemctl restart pvedaemon
   systemctl restart pveproxy
-  echo "all done!"
+  echo "success: subscription updated from: $FIND to $ACTIVE"
 }
 
 echo "attempting pve-no-subscription patch"
@@ -50,6 +51,5 @@ if ! [ -n "$ARG" ]; then
   fi
 fi
 
-echo "subscription status: $FIND"
 echo "attempting replacement in $FILE..."
 apply_razor1911_crack
