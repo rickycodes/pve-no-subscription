@@ -30,7 +30,7 @@ FILE=/usr/share/perl5/PVE/API2/Subscription.pm
 ARG="$1"
 
 apply_razor1911_crack() {
-  sed -i "s/$FIND/$ACTIVE/g" "$FILE"
+  sed -i "s/$FIND/$ACTIVE/gi" "$FILE"
   echo "restarting services..."
   systemctl restart pvedaemon
   systemctl restart pveproxy
